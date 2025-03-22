@@ -1,102 +1,160 @@
-import Image from "next/image";
+'use client';
+
+import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [isLoading, setIsLoading] = useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+  useEffect(() => {
+    document.title = "Welcome Page";
+  }, []);
+
+  const handleWalletConnect = () => {
+    // Add wallet connection logic here
+    console.log('Connecting wallet...');
+  };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div className="app-container">
+      <nav className="navbar">
+        <div className="nav-content">
+          <div className="nav-logo-container">
+            <Image 
+              src="/logo_wharae_coin_-_orange.png" 
+              alt="Wharae chain Logo" 
+              className="nav-logo"
+              width={50}
+              height={50}
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <span className="nav-brand">WhareChain</span>
+          </div>
+          <button className="wallet-button" onClick={handleWalletConnect}>
+            <Image 
+              src="/metamask.png" 
+              alt="Metamask Logo" 
+              className="wallet-icon"
+              width={24}
+              height={24}
+            />
+            Connect Wallet
+          </button>
         </div>
+      </nav>
+
+      <main>
+        <section className="hero-section">
+          <div className="hero-content">
+            <h1 className="hero-title">Building Trust,</h1>
+            <h1 className="hero-title">One Block at a Time</h1>
+            <h2 className="hero-subtitle">Transparent Housing Registry (THR)</h2>
+            <p className="hero-description">A blockchain - powered database ensuring real-time transparency and efficiency in state housing allocation.</p>
+          </div>
+          <Image 
+            src="/house.webp"
+            alt="Residential Construction"
+            className="hero-image"
+            width={800}
+            height={600}
+          />
+        </section>
+
+        <section className="what-we-do">
+          <h2 className="what-we-do-title">WHAT WE DO</h2>
+          <hr className="divider" />
+          <div className="content-grid">
+            <Image 
+              src="/manio.avif"
+              alt="People Working"
+              className="content-image"
+              width={600}
+              height={400}
+            />
+            <div className="content-text">
+              <p>At WhareChain, we are transforming how communities access and trust social housing. We use blockchain technology to build a transparent, secure, and tamper-proof platform that assures equitable allocation of housing resources. Our technology uses smart contracts to automate procedures such as eligibility verification and rent management while also providing stakeholders with real-time insights into housing operations. With an emphasis on accountability and community-driven governance, we're creating a future in which social housing is accessible, efficient, and rooted in trust. Together, we can build a world in which everyone has a place to call home.</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="vision-section">
+          <h2 className="vision-title">OUR VISION</h2>
+          <hr className="vision-divider" />
+          <div className="vision-grid">
+            <div className="vision-item">
+              <svg className="vision-icon" viewBox="0 0 24 24" fill="none" stroke="#00000A" strokeWidth="2">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10"/>
+                <path d="M12 6l0 0.01M12 12l0 0.01"/>
+              </svg>
+              <h3 className="vision-subtitle">Fairness</h3>
+              <p className="vision-text">Fair housing starts with clear data. Web3 ensures no one is left behind.</p>
+            </div>
+            <div className="vision-item">
+              <svg className="vision-icon" viewBox="0 0 24 24" fill="none" stroke="#00000A" strokeWidth="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <rect x="9" y="13" width="6" height="8"/>
+              </svg>
+              <h3 className="vision-subtitle">Transparency</h3>
+              <p className="vision-text">Transparency isn't a privilege, it's a right. Fair housing is built on trust, transparency, and technology.</p>
+            </div>
+            <div className="vision-item">
+              <svg className="vision-icon" viewBox="0 0 24 24" fill="none" stroke="#00000A" strokeWidth="2">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="M21 21l-4.35-4.35"/>
+              </svg>
+              <h3 className="vision-subtitle">Innovation</h3>
+              <p className="vision-text">Innovation meets impact: Blockchain solutions for real world housing challenges.</p>
+            </div>
+          </div>
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      <footer className="footer">
+        <div className="footer-content">
+          <div className="footer-column">
+            <h3 className="footer-title">About Us</h3>
+            <div className="footer-links">
+              <a href="#">Our Story</a>
+              <a href="#">Team</a>
+              <a href="#">Careers</a>
+              <a href="#">Contact</a>
+            </div>
+          </div>
+          <div className="footer-column">
+            <h3 className="footer-title">Services</h3>
+            <div className="footer-links">
+              <a href="#">Wait-listing</a>
+              <a href="#">Maintainance</a>
+              <a href="#">NFTs</a>
+              <a href="#">DeFi</a>
+            </div>
+          </div>
+          <div className="footer-column">
+            <h3 className="footer-title">Resources</h3>
+            <div className="footer-links">
+              <a href="#">Documentation</a>
+              <a href="#">Whitepaper</a>
+              <a href="#">Blog</a>
+              <a href="#">FAQ</a>
+            </div>
+          </div>
+          <div className="footer-column">
+            <h3 className="footer-title">Legal</h3>
+            <div className="footer-links">
+              <a href="#">Privacy Policy</a>
+              <a href="#">Terms of Service</a>
+              <a href="#">Cookie Policy</a>
+              <a href="#">Disclaimer</a>
+            </div>
+          </div>
+        </div>
+        <div className="footer-bottom">
+          <p>© 2024 Your Company. All rights reserved.</p>
+        </div>
       </footer>
     </div>
   );
